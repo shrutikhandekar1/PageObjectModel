@@ -8,7 +8,7 @@
 
 	<test name="Free CRM App Test Cases">
 		<classes>
-			<class name="LoginPageTest"></class>
+			<class name="com.salesforce.qa.testcases.LoginPageTest"></class>
 			<!--class name="HomePageTest"></class>
 			<class name="ContactsPageTest"></class-->
 		</classes>

@@ -13,14 +13,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.salesforce.qa.util.TestUtil;
-import com.salesforce.qa.util.WebEventListener;
+//import com.salesforce.qa.util.WebEventListener;
 
 public class TestBase {
 	
 	public static WebDriver driver;
 	public static Properties prop;
 	public  static EventFiringWebDriver e_driver;
-	public static WebEventListener eventListener;
+	//public static WebEventListener eventListener;
 
 	//All tests use same Excel file but sheets will be different
 	public static final String testDataExcelFileName = "testdata.xlsx";
