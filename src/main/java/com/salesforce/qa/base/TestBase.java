@@ -21,6 +21,9 @@ public class TestBase {
 	public static Properties prop;
 	public  static EventFiringWebDriver e_driver;
 	public static WebEventListener eventListener;
+
+	//All tests use same Excel file but sheets will be different
+	public static final String testDataExcelFileName = "testdata.xlsx";
 	
 	public TestBase(){
 		try {

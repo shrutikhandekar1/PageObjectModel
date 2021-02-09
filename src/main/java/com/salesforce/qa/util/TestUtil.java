@@ -20,7 +20,7 @@ public class TestUtil extends TestBase {
 	public static long IMPLICIT_WAIT = 20;
 
 	public static String TESTDATA_SHEET_PATH = "/Users/Shruti/Documents/workspace"
-			+ "/src/main/java/com/salesforce/qa/testdata/LoginData.xlsx";
+			+ "/src/main/java/com/salesforce/qa/testdata/testdata.xlsx";
 
 	static Workbook book;
 	static Sheet sheet;

@@ -3,12 +3,10 @@ package com.salesforce.qa.testcases;
 import com.salesforce.qa.pages.WelcomePage;
 import com.salesforce.qa.base.TestBase;
 import com.salesforce.qa.pages.LoginPage;
+import com.salesforce.qa.util.ExcelUtil;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -20,6 +18,11 @@ public class LoginPageTest extends TestBase {
 		super();
 	}
 
+	@BeforeTest
+	public void setupTestData(){
+		//set testdata excel and sheet
+		ExcelUtil.setExcelFileSheet("LoginData");
+	}
 	@BeforeMethod
 	public void setUp() {
 		initialization();
@@ -39,9 +42,11 @@ public class LoginPageTest extends TestBase {
 	}
 
 	@Test(priority = 2, dataProvider = "LoginData")
-	public void loginTest_Invalid(String username, String password, String errMessage) {
+	public void loginTest_Invalid(String username, String password, String errMessage) throws InterruptedException {
 		welcomePage = loginPage.login(username, password);
-		if(!errMessage.equals("")){
+		System.out.println(username + " " + password + " " + errMessage + "**");
+		if(!errMessage.equals(null)){
+			Thread.sleep(3000);
 			Assert.assertTrue(driver.getPageSource().contains(errMessage));
 		}
 		Assert.assertEquals(loginPage.validateLoginPageTitle(), "Login | Salesforce");
@@ -53,19 +58,16 @@ public class LoginPageTest extends TestBase {
 	}
 
 	@DataProvider(name = "LoginData")
-	public Object[][] getDataFromDataProvider(Method m) {
+	public Object[][] getDataFromDataProvider(Method m) throws Exception {
 		switch (m.getName()) {
 			case "loginTest_Valid":
 				return new Object[][]{{"monak@gmail.com", "Admin1234"}};
 
 			case "loginTest_Invalid":
-				return new Object[][]
-						{
-								{"", "", ""},
-								{"monak@gmail.com", "", "Please enter your password."},
-								{"", "Admin1234", ""},
-								{"abc", "xyz", "Please check your username and password. If you still can't log in, contact your Salesforce administrator."}
-						};
+				Object[][] testObjArray = ExcelUtil.getTableArray(testDataExcelFileName,"InvalidLoginData");
+
+				return (testObjArray);
+
 		}
 		return null;
 	}

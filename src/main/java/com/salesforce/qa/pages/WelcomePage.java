@@ -6,18 +6,24 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 public class WelcomePage extends TestBase {
     @FindBy(id="phHeaderLogoImage")
     WebElement WelcomePageLogo;
 
-    @FindBy(xpath = "//span[text()[contains(.,'Shruti joshi')]]")
+    //@FindBy(xpath = "//span[text()[contains(.,'Shruti joshi')]]")
+    @FindBy(id="userNavLabel")
     WebElement loggedInUser;
 
     @FindBy(id="getting-started-block")
     WebElement gettingStartedBlock;
 
-    @FindBy(id="userNavLabel")
-    WebElement userDrpDwn;
+    @FindBy(id="userNav-arrow")
+    WebElement userNavBtn;
+
+    @FindBy(id="userNav")
+    WebElement userNavDrpDwn;
 
     public WelcomePage(){
         PageFactory.initElements(driver, this);
@@ -27,12 +33,13 @@ public class WelcomePage extends TestBase {
         return gettingStartedBlock.isDisplayed();
     }
 
-    public boolean verifyLoggedInUser(){
-        return loggedInUser.isDisplayed();
+    public String getLoggedInUser(){
+        return loggedInUser.getText();
     }
 
-    public boolean verifyUserDropDown(){
-        Select userDropdown = new Select();
-
+    public List<WebElement> getUserDropDownItems(){
+        userNavBtn.click();
+        Select userDropdown = new Select(userNavDrpDwn);
+        return userDropdown.getOptions();
     }
 }

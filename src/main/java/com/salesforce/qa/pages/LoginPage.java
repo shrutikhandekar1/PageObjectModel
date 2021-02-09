@@ -3,24 +3,25 @@ package com.salesforce.qa.pages;
 import com.salesforce.qa.base.TestBase;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends TestBase {
 	
 	//Page Factory - OR:
+	@CacheLookup
 	@FindBy(id="username")
 	WebElement username;
-	
+
+	@CacheLookup
 	@FindBy(id="password")
 	WebElement password;
-	
+
+	@CacheLookup
 	@FindBy(id="Login")
 	WebElement loginBtn;
-	
-	@FindBy(xpath="//button[contains(text(),'Sign Up')]")
-	WebElement signUpBtn;
-	
+
 	@FindBy(id="logo")
 	WebElement salesforceLogo;
 
